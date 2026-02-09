@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FortuneTell - Cashflow Forecasting Made Simple</title>
+
+  <!-- Google Analytics -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TNTLHQ1BC6"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TNTLHQ1BC6');
+  </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6170502804659531"
+    crossorigin="anonymous"></script>
+
+  <style>
+    /* Import tokens from the provided tokens.css */
+    :root {
+      --theme-primary: #000000;
+      --theme-secondary: #3f3f3f;
+      --theme-tertiary: #7f7f7f;
+      --theme-accent: #b7b7b7;
+      --theme-background: #ffffff;
+      --semantic-color-safe: #00c853;
+      --semantic-color-safe-hover: #00a844;
+      --semantic-color-warning: #ffc107;
+      --semantic-color-warning-hover: #ffa000;
+      --semantic-color-danger: #ff5252;
+      --semantic-color-danger-hover: #ff1744;
+      --font-size-2xl: 3rem;
+      --font-size-xl: 1.875rem;
+      --font-size-lg: 1.5rem;
+      --font-size-md: 1.25rem;
+      --font-size-sm: 1.125rem;
+      --font-size-xs: 1rem;
+      --font-weight-normal: 400;
+      --font-weight-bold: 700;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 16px;
+      --space-4: 24px;
+      --space-5: 32px;
+      --space-6: 80px;
+      --universal-element-radius: 0.5rem;
+      --line-width-thin: 1px;
+      --line-width-thick: 2px;
+      --container-sm: 40rem;
+      --container-lg: 80rem;
+      --bp-sm: 640px;
+      --bp-md: 768px;
+      --bp-lg: 1024px;
+      --icon-size-sm: 1.125rem;
+      --icon-size-md: 1.25rem;
+      --icon-size-lg: 1.5rem;
+    }
+
+    /* Apply high contrast mode if needed */
+    :root.ft-high-contrast {
+      --theme-primary: #000000;
+      --theme-secondary: #1a1a1a;
+      --theme-tertiary: #333333;
+      --theme-accent: #666666;
+      --theme-background: #ffffff;
+    }
+
+    /* Base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: var(--theme-primary);
+      color: var(--theme-primary);
+      line-height: 1.5;
+      padding: var(--space-3);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      color: var(--theme-background);
+    }
+
+    /* Container for content */
+    .container {
+      max-width: var(--container-lg);
+      width: 100%;
+      margin: 0 auto;
+      padding: var(--space-3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    
+    /* CTA Button */
+    .cta-button {
+      background-color: var(--semantic-color-safe);
+      color: white;
+      border: none;
+      border-radius: var(--universal-element-radius);
+      padding: var(--space-3) var(--space-5);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-bold);
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin: var(--space-4);
+    }
+
+    .cta-button:hover {
+      background-color: var(--semantic-color-safe-hover);
+    }
+
+    .cta-button:focus {
+      outline: var(--line-width-thick) solid var(--theme-accent);
+      outline-offset: 2px;
+    }
+
+    /* ------------------------------------------------------------------
+       App screenshot reproduction (custom CSS; not part of token system)
+    ------------------------------------------------------------------- */
+
+    .ft-mock {
+      width: 330px;
+      border: 1px solid #e7e7e7;
+      border-radius: 14px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    }
+
+    .ft-top {
+      height: 54px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 4px;
+      border-bottom: 1px solid #ededed;
+      background: #fff;
+    }
+
+    .ft-appmark {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: #10b981;
+      color: #fff;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .ft-brand {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    .ft-body {
+      padding: 16px 14px 0 14px;
+    }
+
+    .ft-hero-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .ft-hero-left h2 {
+      font-size: 42px;
+      font-weight: 500;
+      line-height: 1.05;
+      margin-top: 6px;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    /* Top-right icon styling to match material look */
+    .ft-icon-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    color: #111;
+    }
+
+    .ft-icon-btn .material-symbols-outlined {
+    font-size: 22px;
+    }
+
+    .ft-days {
+      font-size: 64px;
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -1px;
+    }
+
+    .ft-sub {
+      margin-top: 14px;
+      font-size: 16px;
+      color: #111;
+    }
+
+    .ft-balance {
+      margin-top: 2px;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .ft-divider {
+      height: 1px;
+      background: #e8e8e8;
+      margin: 16px 0 14px 0;
+    }
+
+    .ft-cal-wrap {
+      border: 1px solid #efefef;
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .ft-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+    }
+
+    .ft-day {
+      height: 40px;
+      border: 2px solid #efefef;
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      color: #6b7280;
+      font-weight: 600;
+      background: #fff;
+      position: relative;
+      user-select: none;
+    }
+
+    .ft-day.is-red {
+      border-color: #ff3b30;
+      background: #ff3b30;
+      color: #fff;
+    }
+
+    .ft-day.is-green {
+      border-color: #10b981;
+      background: #10b981;
+      color: #fff;
+    }
+
+    .ft-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: #fff;
+      position: absolute;
+      bottom: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.95;
+    }
+
+    .ft-bottom {
+      border-top: 1px solid #ededed;
+      margin-top: 16px;
+      padding: 10px 8px 12px 8px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      background: #fff;
+    }
+
+    .ft-nav-item {
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+      color: #111;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .ft-nav-item svg {
+      width: 22px;
+      height: 22px;
+      color: #111;
+    }
+
+    /* Material icons (inline, app-like) */
+    .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-size: 22px;
+    line-height: 1;
+    }
+
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400" rel="stylesheet" />
+
+</head>
+
+<body>
+  <div class="container">
+
+    <h1>FortuneTell</h1>
+
+    <a href="https://app.fortunetell.app"><button class="cta-button">Try the Beta Version</button></a>
+    <!-- HTML/CSS reproduction of the app screenshot (inserted between h1 and button) -->
+    <div class="ft-mock" aria-label="FortuneTell app preview">
+      <div class="ft-top">
+        <div class="ft-appmark">F</div>
+        <div class="ft-brand">ortuneTell</div>
+      </div>
+
+        <div class="ft-body">
+            <div class="ft-hero-row">
+                <div class="ft-hero-left">
+                    <h2>Forecast</h2>
+                    <div class="ft-days">4&nbsp;days</div>
+                </div>
+
+                <div class="ft-icon-btn" aria-label="Refresh">
+                    <span class="material-symbols-outlined">refresh</span>
+                </div>
+
+            </div>
+
+            <div class="ft-sub">Current balance</div>
+            <div class="ft-balance">$60.00</div>
+
+            <div class="ft-divider"></div>
+
+            <div class="ft-cal-wrap" aria-label="Calendar">
+            <div class="ft-cal-grid">
+                <!-- Row 1 -->
+                <div class="ft-day">1</div>
+                <div class="ft-day">2</div>
+                <div class="ft-day">3</div>
+                <div class="ft-day">4</div>
+                <div class="ft-day is-red">5<div class="ft-dot"></div></div>
+                <div class="ft-day">6</div>
+                <div class="ft-day">7</div>
+
+                <!-- Row 2 -->
+                <div class="ft-day">8</div>
+                <div class="ft-day">9</div>
+                <div class="ft-day">10</div>
+                <div class="ft-day">11</div>
+                <div class="ft-day">12</div>
+                <div class="ft-day">13</div>
+                <div class="ft-day">14</div>
+
+                <!-- Row 3 -->
+                <div class="ft-day">15</div>
+                <div class="ft-day">16</div>
+                <div class="ft-day">17</div>
+                <div class="ft-day">18</div>
+                <div class="ft-day">19</div>
+                <div class="ft-day">20</div>
+                <div class="ft-day is-green">21<div class="ft-dot"></div></div>
+
+                <!-- Row 4 -->
+                <div class="ft-day">22</div>
+                <div class="ft-day">23</div>
+                <div class="ft-day">24</div>
+                <div class="ft-day">25</div>
+                <div class="ft-day">26</div>
+                <div class="ft-day">27</div>
+                <div class="ft-day">28</div>
+
+                <!-- Row 5 (partial) -->
+                <div class="ft-day is-red">1<div class="ft-dot"></div></div>
+                <div class="ft-day">2</div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            </div>
+        </div>
+      
+        <div class="ft-bottom" aria-label="Bottom navigation">
+            <div class="ft-nav-item">
+                <span class="material-symbols-outlined">receipt_long</span>
+                <div>Bills</div>
+            </div>
+
+            <div class="ft-nav-item">
+                <span class="material-symbols-outlined">payments</span>
+                <div>Paydays</div>
+            </div>
+
+            <div class="ft-nav-item">
+                <span class="material-symbols-outlined">check_circle</span>
+                <div>Posted</div>
+            </div>
+
+            <div class="ft-nav-item">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+                <div>Account</div>
+            </div>
+
+            <div class="ft-nav-item">
+                <span class="material-symbols-outlined">settings</span>
+                <div>Settings</div>
+            </div>
+        </div>
+    </div>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6170502804659531"
+     crossorigin="anonymous"></script>
+      <!-- FTL_App_Responsive_HZ -->
+      <ins class="adsbygoogle"
+          style="display:block"
+          data-ad-client="ca-pub-6170502804659531"
+          data-ad-slot="3908108651"
+          data-ad-format="auto"
+          data-full-width-responsive="true">
+        </ins>
+    <script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+</body>
+</html>
